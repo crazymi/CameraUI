@@ -8,11 +8,12 @@ static char sample_file_path[BUFLEN];
 static const char *image_util_stickers_filename[STICKER_NUM] = {
 "deer_left_big.jpg","deer_right_big.jpg","deer_nose_big.jpg",
 "deer_left_small.jpg", "deer_right_small.jpg", "deer_nose_small.jpg",
-"hat0.jpg","hat1.jpg","hat2.jpg",
-"beard_rot.jpg", "deer_nose_s.jpg",
-"glasses_rot.jpg", "santa_rot.jpg",
-"deer_left_mid.jpg", "deer_right_mid.jpg",
-"cat_left.jpg", "cat_right.jpg"
+"hat0.jpg","hat1.jpg","hat2.jpg", //6,7,8
+"beard_rot.jpg", "deer_nose_s.jpg", // 9,10
+"glasses_rot.jpg", "santa_rot.jpg", // 11,12
+"deer_left_mid.jpg", "deer_right_mid.jpg", //13,14
+"cat_left.jpg", "cat_right.jpg", //15,16
+"beard3.jpg", "cat_right3.jpg", "cat_left3.jpg", "nose3.jpg", "glasses3.jpg", //17,18,19,20,21
 };
 
 void _image_util_yuvcpy(camera_preview_data_s* frame, imageinfo* imginfo, int p, int q)
@@ -166,6 +167,9 @@ void _image_util_read_stickers(imageinfo* imgarr)
 {
 	for(int i=0;i<STICKER_NUM;i++)
 	{
+		if(i==17) {
+			int j=0;
+		}
 		_image_util_read_jpeg(&imgarr[i], i);
 	}
 }

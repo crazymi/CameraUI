@@ -66,17 +66,34 @@ void draw_santa(camera_preview_data_s* frame, const full_object_detection shape,
 	int jx = frame->height - shape.part(8)(0);
 	int jy = shape.part(8)(1);
 
+	int fore_l = frame->height - shape.part(17)(0);
+	int fore_r = frame->height - shape.part(26)(0);
+	int migan = fore_l - fore_r;
+
 	int nose_x = frame->height - shape.part(27)(0);
 	int nose_y = shape.part(27)(1);
 
-	// beard
-	_image_util_santacpy(frame, &imgarr[12], jy, jx);
+	if(migan > 40)
+	{
+		// beard
+		//	_image_util_santacpy(frame, &imgarr[12], jy, jx);
 
-	// hat
-	_image_util_yuvcpy(frame, &imgarr[6], hy, hx);
+		// hat
+		_image_util_yuvcpy(frame, &imgarr[6], hy, hx);
 
-	// glasses
-	_image_util_yuvcpy(frame, &imgarr[11], nose_y, nose_x);
+		// glasses
+		_image_util_yuvcpy(frame, &imgarr[11], nose_y, nose_x);
+	} else
+	{
+		// beard
+		// _image_util_santacpy(frame, &imgarr[12], jy, jx);
+
+		// hat
+		_image_util_yuvcpy(frame, &imgarr[8], hy, hx);
+
+		// glasses
+		_image_util_yuvcpy(frame, &imgarr[21], nose_y, nose_x);
+	}
 }
 
 void draw_nyan(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
@@ -90,14 +107,28 @@ void draw_nyan(camera_preview_data_s* frame, const full_object_detection shape, 
 
 	int migan = fore_l - fore_r;
 
-	// draw left ear
-	_image_util_yuvcpy(frame, &imgarr[15], h, fore_l);
+	if(migan > 40)
+	{
+		// draw left ear
+		_image_util_yuvcpy(frame, &imgarr[15], h, fore_l);
 
-	// draw right ear
-	_image_util_yuvcpy(frame, &imgarr[16], h, fore_r);
+		// draw right ear
+		_image_util_yuvcpy(frame, &imgarr[16], h, fore_r);
 
-	// draw nose
-	_image_util_yuvcpy(frame, &imgarr[9], nose_y, nose_x);
+		// draw nose
+		_image_util_yuvcpy(frame, &imgarr[9], nose_y, nose_x);
+	}
+	else
+	{
+		// draw left ear
+		_image_util_yuvcpy(frame, &imgarr[19], h, fore_l);
+
+		// draw right ear
+		_image_util_yuvcpy(frame, &imgarr[18], h, fore_r);
+
+		// draw nose
+		_image_util_yuvcpy(frame, &imgarr[17], nose_y, nose_x);
+	}
 }
 
 void draw_rudolph(camera_preview_data_s* frame, const full_object_detection shape, imageinfo* imgarr)
